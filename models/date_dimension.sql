@@ -1,0 +1,15 @@
+WITH CTE AS (
+SELECT 
+    TRY_TO_TIMESTAMP(STARTED_AT) AS STARTED,
+    DATE(TRY_TO_TIMESTAMP(STARTED_AT)) AS DATE_STARTED_AT,
+    HOUR(TRY_TO_TIMESTAMP(STARTED_AT)) AS HOUR_STARTED_AT,
+    DAYOFWEEK(TRY_TO_TIMESTAMP(STARTED_AT)) AS DAY_OIF_WEEK,
+    {{day_type('started_at')}} as DAY_TYPE,
+    {{get_season('started_at')}}AS STATION_OF_YEAR
+from 
+{{ source('demo', 'bike') }}
+
+
+)
+select
+* from CTE
