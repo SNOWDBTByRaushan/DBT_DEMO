@@ -1,3 +1,5 @@
+{{config(materialized = 'table')}}
+
 WITH CTE AS (
 SELECT 
     TRY_TO_TIMESTAMP(STARTED_AT) AS STARTED,
